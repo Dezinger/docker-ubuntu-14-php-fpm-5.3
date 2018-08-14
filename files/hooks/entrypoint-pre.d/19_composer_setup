@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "Setup Composer"
+
+export GITHUB_OAUTH_KEY=${GITHUB_OAUTH_KEY:-}
+composer config -a -g github-oauth.github.com $GITHUB_OAUTH_KEY
+composer global require "fxp/composer-asset-plugin:^1.3"

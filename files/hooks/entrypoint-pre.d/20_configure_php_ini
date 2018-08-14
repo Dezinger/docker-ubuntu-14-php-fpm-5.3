@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo "Configure php.ini"
+
+PHP_DISPLAY_ERRORS=${PHP_DISPLAY_ERRORS:-"On"}
+PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-"256M"}
+
+sed -i \
+    -e "s/^display_errors = Off/display_errors = ${PHP_DISPLAY_ERRORS}/" \
+    -e "s/^memory_limit = 128M/memory_limit = ${PHP_MEMORY_LIMIT}/" \
+    /etc/php${PHP_VERSION}/fpm/php.ini
