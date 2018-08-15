@@ -12,7 +12,9 @@ WORKDIR /var/www
 
 RUN \
 # add repo php5.3
-    add-apt-repository ppa:sergey-dryabzhinsky/php53 && apt-get -y update && \
+    add-apt-repository ppa:sergey-dryabzhinsky/php53 && \ 
+    add-apt-repository ppa:sergey-dryabzhinsky/php-modules && \
+    apt-get -y update && \
 # setup php
     apt-get install --no-install-recommends -y \
     curl ca-certificates ssh git supervisor vim wget \
@@ -26,14 +28,17 @@ RUN \
     php53p-mod-xmlrpc \
     php53p-mod-tidy \
     php53p-mod-mcrypt \
+    php53p-mod-json \
+    php53p-mod-phar \
+    php53p-mod-openssl \
     libmemcached-dev \
-    #php53p-mod-memcached \
+    php53-mod-memcached \
     imagemagick \
-    #php53p-mod-imagick \
+    php53-mod-imagick \
     php53p-mod-intl \
-    php53p-mod-mbstring && \
+    php53p-mod-mbstring \
     #php53p-mod-msgpack \
-    #php53p-mod-zip && \
+    php53-mod-zip && \
     php --version && \
     php -m && \
 # setup composer
@@ -42,7 +47,6 @@ RUN \
 # php-fpm config
     cp /etc/php$PHP_VERSION/fpm/pool.d/pool-www-data.conf.example /etc/php$PHP_VERSION/fpm/pool.d/www.conf && \
     sed -i -e 's/^listen = \/var\/run\/php53-fpm\/\$pool.socket$/listen = 9000/g' /etc/php$PHP_VERSION/fpm/pool.d/www.conf  && \
-    
     ln -sf /etc/php$PHP_VERSION/fpm/php.ini /etc/php$PHP_VERSION/cli/php.ini && \
 # setup mode
     chmod +x /usr/local/bin/add-ssh-keys.sh
