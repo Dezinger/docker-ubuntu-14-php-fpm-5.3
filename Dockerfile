@@ -48,7 +48,9 @@ RUN \
     php -- --install-dir=/usr/bin/ --filename=composer && \
 # php-fpm config
     cp /etc/php$PHP_VERSION/fpm/pool.d/pool-www-data.conf.example /etc/php$PHP_VERSION/fpm/pool.d/www.conf && \
-    sed -i -e 's/^listen = \/var\/run\/php53-fpm\/\$pool.socket$/listen = 9000/g' /etc/php$PHP_VERSION/fpm/pool.d/www.conf  && \
+    sed -i -e 's/^listen = \/var\/run\/php53-fpm\/\$pool.socket$/listen = 9000/g' \ 
+           -e 's/^prefix = /var/www/sites/default$/;prefix = /var/www/sites/default/g' \ 
+           /etc/php$PHP_VERSION/fpm/pool.d/www.conf && \
     ln -sf /etc/php$PHP_VERSION/fpm/php.ini /etc/php$PHP_VERSION/cli/php.ini && \
 # setup mode
     chmod +x /usr/local/bin/add-ssh-keys.sh
