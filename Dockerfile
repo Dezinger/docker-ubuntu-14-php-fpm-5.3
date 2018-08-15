@@ -37,6 +37,8 @@ RUN \
     php53-mod-imagick \
     php53p-mod-intl \
     php53p-mod-mbstring \
+    php53p-mod-dom \
+    php53p-mod-tokenizer \
     #php53p-mod-msgpack \
     php53-mod-zip && \
     php --version && \
