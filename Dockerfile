@@ -17,7 +17,7 @@ RUN \
     apt-get -y update && \
 # setup php
     apt-get install --no-install-recommends -y \
-    curl ca-certificates ssh git vim build-essential \
+    curl ca-certificates ssh git vim build-essential pkg-config \
     php5-common=$VER \
     php5-cli=$VER \ 
     php5-fpm=$VER \
