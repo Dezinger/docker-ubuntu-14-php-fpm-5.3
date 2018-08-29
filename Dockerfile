@@ -17,10 +17,11 @@ RUN \
     apt-get -y update && \
 # setup php
     apt-get install --no-install-recommends -y \
-    curl ca-certificates ssh git vim \
+    curl ca-certificates ssh git vim build-essential \
     php5-common=$VER \
     php5-cli=$VER \ 
     php5-fpm=$VER \
+    php5-dev=$VER \
     #php-apc \
     php-pear=$VER \
     php5-pgsql=$VER \
@@ -38,6 +39,7 @@ RUN \
     #php5-mbstring \
     #php5-msgpack \
     #php5-zip && \
+    pecl install apc \
     php --version && \
     php -m && \
 # setup composer
