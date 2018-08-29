@@ -39,7 +39,7 @@ RUN \
     #php5-mbstring \
     #php5-msgpack \
     #php5-zip && \
-    pecl install apc \
+    pecl install apc && \
     php --version && \
     php -m && \
 # setup composer
