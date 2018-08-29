@@ -17,7 +17,8 @@ RUN \
     apt-get -y update && \
 # setup php
     apt-get install --no-install-recommends -y \
-    curl ca-certificates ssh git vim build-essential pkg-config \
+    curl ca-certificates ssh git vim \ 
+    build-essential pkg-config \
     php5-common=$VER \
     php5-cli=$VER \ 
     php5-fpm=$VER \
@@ -40,6 +41,11 @@ RUN \
     #php5-msgpack \
     #php5-zip && \
     pecl install apc && \
+# Configure and install memcached extention
+    pecl download memcached-2.2.0 && \
+    tar xzvf memcached-2.2.0.tgz && \
+    cd memcached-2.2.0/ && phpize && ./configure --disable-memcached-sasl && \
+    make && make install && cd .. && rm -r memcached-2.2.0 && \
     php --version && \
     php -m && \
 # setup composer
